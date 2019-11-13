@@ -17,6 +17,11 @@
             <groupId>com.chachae</groupId>
             <artifactId>chachae-model</artifactId>
         </dependency>
+        <!-- utils -->
+        <dependency>
+            <groupId>com.chachae</groupId>
+            <artifactId>chachae-utils</artifactId>
+        </dependency>
         <!-- tkmapper -->
         <dependency>
             <groupId>tk.mybatis</groupId>

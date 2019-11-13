@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chachae.dao.UserInfoDao">
+    <resultMap id="BaseResultMap" type="UserInfo">
+        <id column="id" property="id"/>
+        <result column="uuid" property="uuid"/>
+        <result column="name" property="name"/>
+        <result column="email" property="email"/>
+        <result column="orientation" property="orientation"/>
+        <result column="gender" property="gender"/>
+        <result column="avatar" property="avatar"/>
+        <result column="phone" property="phone"/>
+        <result column="info" property="info"/>
+        <result column="speciality" property="speciality"/>
+        <result column="department_id" property="departmentId"/>
+        <collection property="user" javaType="User" ofType="User">
+            <result property="uuid" column="uuid"/>
+            <result property="username" column="username"/>
+            <result property="password" column="password"/>
+            <result property="role" column="role"/>
+        </collection>
+    </resultMap>
+
+    <select id="queryByUuid" parameterType="string" resultMap="BaseResultMap">
+        SELECT t_user_info.*,
+        t_user.username,
+        role,
+        password
+        FROM t_user_info
+        INNER JOIN t_user ON t_user.uuid = t_user_info.uuid
+        WHERE t_user_info.uuid = #{uuid,jdbcType=VARCHAR}
+    </select>
+
+    <select id="queryAll" resultMap="BaseResultMap">
+        SELECT t.*, tu.username, password, role
+        FROM t_user_info t,
+             t_user tu
+        WHERE t.uuid = tu.uuid
+    </select>
+
+    <select id="fuzzyQuery" resultMap="BaseResultMap">
+        SELECT t_user_info.*,
+        t_user.username,
+        role,
+        password
+        FROM t_user_info
+        INNER JOIN t_user ON t_user.uuid = t_user_info.uuid
+        <if test="name != null and name != ''">
+            WHERE t_user_info.name LIKE CONCAT ('%',CONCAT(#{name,jdbcType=VARCHAR},'%'))
+        </if>
+        <if test="deptId != null">
+            AND t_user_info.department_id = #{deptId,jdbcType=INTEGER}
+        </if>
+    </select>
+</mapper>

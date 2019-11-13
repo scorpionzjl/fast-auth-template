@@ -12,18 +12,20 @@
     <artifactId>chachae-web</artifactId>
 
     <dependencies>
+        <!-- web starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.chachae</groupId>
-            <artifactId>chachae-dao</artifactId>
-        </dependency>
+        <!-- service -->
         <dependency>
             <groupId>com.chachae</groupId>
             <artifactId>chachae-service</artifactId>
+        </dependency>
+        <!-- shiro -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
         </dependency>
     </dependencies>
 </project>

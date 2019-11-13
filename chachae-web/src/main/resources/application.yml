@@ -4,14 +4,18 @@ spring:
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
     sql-script-encoding: utf-8
-    url: jdbc:mysql:///db_yunke-test?useSSL=false
+    url: jdbc:mysql:///parentboot?useSSL=false
 
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
   type-aliases-package: com.chachae.entity
+  mapper-locations: classpath:mappers/*Mapper.xml
 
 server:
   servlet:
-    context-path: "/api"
+    context-path: '/api'
   port: 8099
+logging:
+  level:
+    com: debug

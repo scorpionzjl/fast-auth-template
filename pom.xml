@@ -13,6 +13,7 @@
         <module>chachae-service</module>
         <module>chachae-web</module>
         <module>chachae-model</module>
+        <module>chachae-utils</module>
     </modules>
 
     <parent>
@@ -43,6 +44,11 @@
             <dependency>
                 <groupId>com.chachae</groupId>
                 <artifactId>chachae-web</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.chachae</groupId>
+                <artifactId>chachae-utils</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <!-- mysql -->
@@ -76,13 +82,44 @@
                 <artifactId>guava</artifactId>
                 <version>28.1-jre</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api -->
-            <!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
+            <!-- persistence -->
             <dependency>
                 <groupId>org.hibernate.javax.persistence</groupId>
                 <artifactId>hibernate-jpa-2.1-api</artifactId>
                 <version>1.0.2.Final</version>
             </dependency>
+            <!-- hutool-all -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>5.0.5</version>
+            </dependency>
+            <!-- jackson -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.10.0.pr1</version>
+                <scope>compile</scope>
+            </dependency>
+            <!-- shiro -->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-core</artifactId>
+                <version>1.4.1</version>
+            </dependency>
+            <!-- hibernate-validator -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>6.1.0.Final</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/cglib/cglib -->
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>3.3.0</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 </project>
