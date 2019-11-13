@@ -1,0 +1,15 @@
+.idea
+*.iml
+out
+gen
+.idea/$PRODUCT_WORKSPACE_FILE$
+.idea/.gitignore
+.idea/codeStyles/
+.idea/compiler.xml
+.idea/dictionaries
+.idea/google-java-format.xml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.gitignore
+src/test/
+target/

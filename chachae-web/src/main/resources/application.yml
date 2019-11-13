@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    sql-script-encoding: utf-8
+    url: jdbc:mysql:///db_yunke-test?useSSL=false
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.chachae.entity
+
+server:
+  servlet:
+    context-path: "/api"
+  port: 8099
