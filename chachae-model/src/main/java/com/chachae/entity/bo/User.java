@@ -3,7 +3,6 @@ package com.chachae.entity.bo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -18,8 +17,7 @@ import java.io.Serializable;
 @Table(name = "t_user")
 public class User implements Serializable {
 
-  @Id
-  private String uuid;
+  @Id private String uuid;
 
   @NotNull(message = "用户名不能为空")
   private String username;

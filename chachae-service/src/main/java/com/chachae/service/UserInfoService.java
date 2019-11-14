@@ -2,6 +2,8 @@ package com.chachae.service;
 
 import com.chachae.entity.bo.UserInfo;
 import com.chachae.entity.vo.UserInfoVO;
+import com.chachae.exception.ServiceException;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,7 +18,7 @@ public interface UserInfoService {
    *
    * @return List
    */
-  List<UserInfoVO> getList();
+  List<UserInfoVO> queryAll();
 
   /**
    * 更新用户登录信息

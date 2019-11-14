@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
   @Resource private UserInfoDao userInfoDao;
 
   @Override
-  public List<User> getList() {
+  public List<User> queryAll() {
     return this.userDao.selectAll();
   }
 

@@ -12,6 +12,11 @@
     <artifactId>chachae-model</artifactId>
 
     <dependencies>
+        <!-- utils -->
+        <dependency>
+            <groupId>com.chachae</groupId>
+            <artifactId>chachae-utils</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

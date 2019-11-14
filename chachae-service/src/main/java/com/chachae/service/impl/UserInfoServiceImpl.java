@@ -26,7 +26,7 @@ public class UserInfoServiceImpl implements UserInfoService {
   }
 
   @Override
-  public List<UserInfoVO> getList() {
+  public List<UserInfoVO> queryAll() {
     List<UserInfo> boList = this.userInfoDao.queryAll();
     return commonResultTemplate(boList);
   }

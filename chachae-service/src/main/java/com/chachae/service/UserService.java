@@ -16,7 +16,7 @@ public interface UserService {
    *
    * @return List
    */
-  List<User> getList();
+  List<User> queryAll();
 
   /**
    * 通过uuid 删除用户信息

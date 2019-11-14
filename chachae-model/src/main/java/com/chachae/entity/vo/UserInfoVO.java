@@ -23,7 +23,7 @@ public class UserInfoVO {
 
   private Integer orientation;
 
-  private Integer sex;
+  private Integer gender;
 
   private String avatar;
 
@@ -33,7 +33,7 @@ public class UserInfoVO {
 
   private String speciality;
 
-  private Integer note;
+  private Integer departmentId;
 
   private Integer role;
 }

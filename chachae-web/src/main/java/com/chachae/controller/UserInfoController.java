@@ -21,7 +21,7 @@ public class UserInfoController {
 
   @GetMapping("/list")
   public Result list() {
-    List<UserInfoVO> list = this.userInfoService.getList();
+    List<UserInfoVO> list = this.userInfoService.queryAll();
     return Result.success("获取成功", list);
   }
 
@@ -37,7 +37,7 @@ public class UserInfoController {
     return Result.success("更新成功");
   }
 
-  @PostMapping("/query")
+  @GetMapping("/query")
   public Result fuzzyQuery(String name, Integer deptId) {
     List<UserInfoVO> voList = this.userInfoService.fuzzyQuery(name, deptId);
     return Result.success("获取成功", voList);

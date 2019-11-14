@@ -39,5 +39,9 @@
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
         </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
     </dependencies>
 </project>

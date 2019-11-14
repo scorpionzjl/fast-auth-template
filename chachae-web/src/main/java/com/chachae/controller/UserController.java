@@ -29,7 +29,7 @@ public class UserController {
    */
   @GetMapping("/list")
   public Result list() {
-    List<User> userList = this.userService.getList();
+    List<User> userList = this.userService.queryAll();
     if (ObjectUtil.isNotEmpty(userList)) {
       return Result.success("获取成功", userList);
     }
