@@ -7,6 +7,7 @@ import com.chachae.service.UserInfoService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ public class UserInfoController {
   }
 
   @PutMapping("/update")
-  public Result update(UserInfo userInfo) {
+  public Result update(@Valid UserInfo userInfo) {
     this.userInfoService.update(userInfo);
     return Result.success("更新成功");
   }

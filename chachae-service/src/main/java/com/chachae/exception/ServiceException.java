@@ -1,6 +1,8 @@
 package com.chachae.exception;
 
 /**
+ * 业务层异常处理
+ *
  * @author chachae
  * @date 2019/11/14 15:58
  */

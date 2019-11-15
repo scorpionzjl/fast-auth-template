@@ -131,6 +131,6 @@ public class DepartmentServiceImpl implements DepartmentService {
     if (parentId != 0 || ObjectUtil.isEmpty(list)) {
       return true;
     }
-    throw new ServiceException("存在二级部门，不允许删除！");
+    throw new ServiceException("该部门下存在二级部门，不允许删除！");
   }
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chachae.dao.AuthDao">
+
+    <select id="queryByEmail" parameterType="string" resultType="User">
+        SELECT t_user.* FROM t_user INNER JOIN t_user_info AS INFO ON t_user.uuid = info.uuid AND info.email =
+        #{email,jdbcType=VARCHAR}
+    </select>
+</mapper>

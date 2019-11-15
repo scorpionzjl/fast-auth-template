@@ -1,13 +1,16 @@
 package com.chachae.service.impl;
 
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.chachae.dao.UserDao;
 import com.chachae.dao.UserInfoDao;
 import com.chachae.entity.bo.User;
 import com.chachae.entity.bo.UserInfo;
+import com.chachae.exception.ServiceException;
 import com.chachae.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -40,6 +43,9 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public void add(User user) {
+    if (isExist(user.getUsername())) {
+      throw new ServiceException("用户名已存在！");
+    }
     // 创建uuid
     String uuid = IdUtil.simpleUUID();
     user.setUuid(uuid);
@@ -52,5 +58,19 @@ public class UserServiceImpl implements UserService {
   @Override
   public User queryByPrimaryKey(String uuid) {
     return this.userDao.selectByPrimaryKey(uuid);
+  }
+
+  /**
+   * 检查用户名是否已经存在
+   *
+   * @param username 用户名
+   * @return boolean
+   */
+  private boolean isExist(String username) {
+    Example example = new Example(User.class);
+    Example.Criteria criteria = example.createCriteria();
+    criteria.andEqualTo("username", username);
+    List<User> users = this.userDao.selectByExample(example);
+    return ObjectUtil.isNotEmpty(users);
   }
 }

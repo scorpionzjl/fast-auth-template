@@ -4,7 +4,8 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.chachae.exception.PermissionException;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import net.sf.cglib.beans.BeanCopier;
+import org.springframework.cglib.beans.BeanCopier;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.Map;
  * @author chachae
  * @date 2019/11/13 15:43
  */
+@Component
 public class BeanCopyUtil {
   private static Map<String, BeanCopier> map = Maps.newHashMap();
   /**
