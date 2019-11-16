@@ -1,6 +1,7 @@
 package com.chachae.exception;
 
 import com.chachae.common.Result;
+import com.chachae.security.exception.SecurityModuleException;
 import com.chachae.utils.DateUtil;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
@@ -38,15 +39,20 @@ public class GlobalExceptionHandler {
   }
 
   /**
-   * 对象复制异常
+   * 控制层异常
    *
    * @param ex 异常
    * @return 异常响应信息
    */
-  @ExceptionHandler(PermissionException.class)
-  public Result serviceExceptionHandler(PermissionException ex, HttpServletRequest request) {
+  @ExceptionHandler(ControllerException.class)
+  public Result controllerExceptionHandler(ControllerException ex, HttpServletRequest request) {
     Map<String, Object> apiErrMap = exceptionMsgTemplate(ex, request);
-    return Result.fail("工具类执行异常", apiErrMap);
+    return Result.fail("控制层异常", apiErrMap);
+  }
+
+  @ExceptionHandler(SecurityModuleException.class)
+  public Result disableAccountExceptionHandler(SecurityModuleException ex) {
+    return Result.fail("安全模块异常", ex.getMessage());
   }
 
   /**

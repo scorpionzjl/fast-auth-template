@@ -15,8 +15,8 @@ public interface PermissionDao extends Mapper<Permission> {
   /**
    * 通过角色id 查询对应角色下的全部权限
    *
-   * @param roleId 角色id
+   * @param uuid 用户uuid
    * @return 角色权限信息
    */
-  List<Permission> queryByRoleId(@Param("roleId") Integer roleId);
+  List<Permission> queryByUuid(@Param("uuid") String uuid);
 }

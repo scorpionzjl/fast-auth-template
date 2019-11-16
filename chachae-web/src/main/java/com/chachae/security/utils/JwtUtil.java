@@ -1,4 +1,4 @@
-package com.chachae.utils;
+package com.chachae.security.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -10,6 +10,8 @@ import com.chachae.common.CommonConsts;
 import java.util.Date;
 
 /**
+ * Jwt 工具类
+ *
  * @author chachae
  * @date 2019/11/14 21:00
  */
@@ -27,7 +29,7 @@ public class JwtUtil {
       JWTVerifier verifier =
           JWT.require(algorithm)
               .withClaim("username", getAttribute(token, "username"))
-              .withClaim("id", getAttribute(token, "id"))
+              .withClaim("uuid", getAttribute(token, "uuid"))
               .build();
       verifier.verify(token);
       return true;
@@ -39,18 +41,16 @@ public class JwtUtil {
   /**
    * 生成签名, 一周后过期
    *
-   * @author lanjerry
-   * @since 2019/9/10 15:06
-   * @param id id
-   * @param account 账号
+   * @param uuid uuid
+   * @param username 账号
    * @param secret 加密
    */
-  public static String sign(Integer id, String account, String secret) {
+  public static String sign(String uuid, String username, String secret) {
     Date date = new Date(System.currentTimeMillis() + CommonConsts.JWT_EXPIRE_TIME);
     Algorithm algorithm = Algorithm.HMAC256(secret);
     return JWT.create()
-        .withClaim("id", id)
-        .withClaim("account", account)
+        .withClaim("uuid", uuid)
+        .withClaim("username", username)
         .withExpiresAt(date)
         .sign(algorithm);
   }
@@ -58,8 +58,6 @@ public class JwtUtil {
   /**
    * 获取账号
    *
-   * @author lanjerry
-   * @since 2019/9/10 18:54
    * @param token token
    */
   public static String getAttribute(String token, String attribute) {
@@ -72,9 +70,9 @@ public class JwtUtil {
   }
 
   public static void main(String[] args) {
-    String token = sign(1, "admin", "123456");
+    String token = sign("1", "admin", "123");
     System.out.println("token:" + token);
-    boolean verifyFlag = verify(token, "123456");
+    boolean verifyFlag = verify(token, "123");
     System.out.println("token是否验证通过：" + verifyFlag);
   }
 }

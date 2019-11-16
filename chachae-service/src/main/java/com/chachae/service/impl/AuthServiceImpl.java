@@ -1,15 +1,19 @@
 package com.chachae.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.chachae.dao.AuthDao;
+import com.chachae.dao.PermissionDao;
+import com.chachae.entity.bo.Permission;
 import com.chachae.entity.bo.User;
-import com.chachae.exception.ServiceException;
 import com.chachae.service.AuthService;
+import com.google.common.collect.Sets;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author chachae
@@ -19,8 +23,13 @@ import java.util.List;
 public class AuthServiceImpl implements AuthService {
 
   @Resource private AuthDao authDao;
+  @Resource private PermissionDao permissionDao;
 
-  public User queryUser(String username) {
+  @Override
+  public User queryUserUsername(String username) {
+    if (StrUtil.isBlank(username)) {
+      return null;
+    }
     // 邮箱登录
     if (isEmail(username)) {
       return this.authDao.queryByEmail(username);
@@ -34,8 +43,25 @@ public class AuthServiceImpl implements AuthService {
         // 用户名唯一，get(0) 可以获取准确的用户登录信息
         return list.get(0);
       }
-      throw new ServiceException("用户不存在！");
     }
+    return null;
+  }
+
+  @Override
+  public Integer queryRoleByUuid(String uuid) {
+    Example example = new Example(User.class);
+    Example.Criteria criteria = example.createCriteria();
+    criteria.andEqualTo("uuid", uuid);
+    User user = this.authDao.selectByExample(example).get(0);
+    return user.getRole();
+  }
+
+  @Override
+  public Set<String> queryPermissionsByUuid(String uuid) {
+    List<Permission> list = this.permissionDao.queryByUuid(uuid);
+    Set<String> set = Sets.newHashSet();
+    list.forEach(pms -> set.add(pms.getPermission()));
+    return set;
   }
 
   /**

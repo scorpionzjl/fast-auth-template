@@ -117,7 +117,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     List<Department> list = this.departmentDao.selectAll();
     for (Department dept : list) {
       if (dept.getName().equals(name)) {
-        throw new ServiceException("存在同名部门，不允许添加");
+        throw new ServiceException("存在同名部门，不允许添加！");
       }
     }
     return true;

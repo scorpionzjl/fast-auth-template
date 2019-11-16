@@ -13,8 +13,8 @@ public interface PermissionService {
   /**
    * 通过角色等级查询所有权限信息
    *
-   * @param roleId 角色等级
+   * @param uuid 用户uuid
    * @return 权限信息
    */
-  List<Permission> queryByRoleId(Integer roleId);
+  List<Permission> queryByUuid(String uuid);
 }
