@@ -22,133 +22,109 @@
         <relativePath/>
     </parent>
 
+    <!-- 统一依赖版本管理 -->
+    <properties>
+        <module.version>1.0-SNAPSHOT</module.version>
+        <mysql.driver.version>5.1.48</mysql.driver.version>
+        <lombok.version>1.18.10</lombok.version>
+        <tkmapper.version>4.1.5</tkmapper.version>
+        <mybatis.starter.version>2.1.1</mybatis.starter.version>
+        <guava.version>28.1-jre</guava.version>
+        <hutool.version>5.0.5</hutool.version>
+        <shiro.version>1.4.1</shiro.version>
+        <jwt.version>3.8.3</jwt.version>
+        <valid.version>6.1.0.Final</valid.version>
+        <joda.version>2.10.5</joda.version>
+    </properties>
+
+    <!-- 模块统一管理 -->
     <dependencyManagement>
         <dependencies>
-            <!-- 模块统一管理 -->
             <dependency>
                 <groupId>com.chachae</groupId>
                 <artifactId>chachae-dao</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.chachae</groupId>
-                <artifactId>chachae-model</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.chachae</groupId>
-                <artifactId>chachae-security</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${module.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.chachae</groupId>
                 <artifactId>chachae-service</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${module.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.chachae</groupId>
                 <artifactId>chachae-web</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${module.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.chachae</groupId>
-                <artifactId>chachae-utils</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.chachae</groupId>
-                <artifactId>chachae-common-core</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.chachae</groupId>
-                <artifactId>chachae-common-security</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <artifactId>chachae-common</artifactId>
+                <version>${module.version}</version>
             </dependency>
             <!-- mysql -->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.48</version>
+                <version>${mysql.driver.version}</version>
             </dependency>
             <!-- lombok -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>1.18.10</version>
+                <version>${lombok.version}</version>
             </dependency>
             <!-- tkmapper -->
             <dependency>
                 <groupId>tk.mybatis</groupId>
                 <artifactId>mapper</artifactId>
-                <version>4.1.5</version>
+                <version>${tkmapper.version}</version>
             </dependency>
             <!-- mybatis -->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>2.1.1</version>
+                <version>${mybatis.starter.version}</version>
             </dependency>
             <!-- guava -->
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>28.1-jre</version>
-            </dependency>
-            <!-- persistence -->
-            <dependency>
-                <groupId>org.hibernate.javax.persistence</groupId>
-                <artifactId>hibernate-jpa-2.1-api</artifactId>
-                <version>1.0.2.Final</version>
+                <version>${guava.version}</version>
             </dependency>
             <!-- hutool-all -->
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
-                <version>5.0.5</version>
-            </dependency>
-            <!-- jackson -->
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>2.10.0.pr1</version>
-                <scope>compile</scope>
+                <version>${hutool.version}</version>
             </dependency>
             <!-- shiro -->
             <dependency>
                 <groupId>org.apache.shiro</groupId>
                 <artifactId>shiro-core</artifactId>
-                <version>1.4.1</version>
+                <version>${shiro.version}</version>
             </dependency>
             <!-- shiro-spring -->
             <dependency>
                 <groupId>org.apache.shiro</groupId>
                 <artifactId>shiro-spring</artifactId>
-                <version>1.4.1</version>
+                <version>${shiro.version}</version>
             </dependency>
             <!-- jwt -->
             <dependency>
                 <groupId>com.auth0</groupId>
                 <artifactId>java-jwt</artifactId>
-                <version>3.8.3</version>
+                <version>${jwt.version}</version>
             </dependency>
             <!-- hibernate-validator -->
             <dependency>
                 <groupId>org.hibernate.validator</groupId>
                 <artifactId>hibernate-validator</artifactId>
-                <version>6.1.0.Final</version>
-            </dependency>
-            <!-- cglib -->
-            <dependency>
-                <groupId>cglib</groupId>
-                <artifactId>cglib</artifactId>
-                <version>3.3.0</version>
+                <version>${valid.version}</version>
             </dependency>
             <!-- joda-time -->
             <dependency>
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
-                <version>2.10.5</version>
+                <version>${joda.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

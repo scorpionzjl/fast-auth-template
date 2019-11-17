@@ -71,8 +71,14 @@ public class JwtAuthFilter extends BasicHttpAuthenticationFilter {
     return req.getHeader("Authorization");
   }
 
-  /** 输出 */
-  private void writerResponse(HttpServletResponse response, long code, String msg) {
+  /**
+   * 这里还未进入shiro 进行用户信息认证，所以要单独对可能发生的异常进行捕获和处理
+   *
+   * @param response 响应
+   * @param code 响应码
+   * @param msg 响应消息
+   */
+  private void writerResponse(HttpServletResponse response, Integer code, String msg) {
     response.setHeader("Content-Type", "application/json;charset=utf-8");
     try {
       Dict dict = Dict.create().set("ret", false).set("status", code).set("msg", msg);

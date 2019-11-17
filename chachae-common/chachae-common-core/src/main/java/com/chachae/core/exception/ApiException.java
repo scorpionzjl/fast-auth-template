@@ -19,7 +19,7 @@ public class ApiException extends RuntimeException implements Serializable {
   private static final long serialVersionUID = 1L;
 
   /** 响应状态回执码 */
-  protected long code;
+  protected Integer code;
 
   /** 响应回执消息 */
   protected String msg;
@@ -27,10 +27,22 @@ public class ApiException extends RuntimeException implements Serializable {
   /** 异常信息 */
   private Exception ex;
 
+  /**
+   * 参数异常
+   *
+   * @param msg 异常消息
+   * @return 异常通知
+   */
   public static ApiException argError(String msg) {
     return ApiException.builder().code(REnum.ARG_ERROR.val).msg(msg).build();
   }
 
+  /**
+   * 系统异常
+   *
+   * @param msg 异常消息
+   * @return 异常通知
+   */
   public static ApiException systemError(String msg) {
     return ApiException.builder().code(REnum.SYSTEM_ERROR.val).msg(msg).build();
   }

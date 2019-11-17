@@ -1,6 +1,8 @@
 package com.chachae.core.entity.bo;
 
+import com.chachae.core.bean.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -15,7 +17,8 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @Table(name = "t_department")
-public class Department {
+@EqualsAndHashCode(callSuper = true)
+public class Department extends BaseEntity {
 
   @Id private Integer id;
 

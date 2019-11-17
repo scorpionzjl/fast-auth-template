@@ -1,7 +1,6 @@
 package com.chachae.security.config;
 
 import cn.hutool.core.util.StrUtil;
-import com.chachae.core.constant.CommonConsts;
 import com.chachae.core.utils.JwtUtil;
 import com.chachae.core.utils.Md5Util;
 import com.chachae.security.jwt.JwtToken;
@@ -24,7 +23,7 @@ public class CredentialsMatcher extends SimpleCredentialsMatcher {
     String accountCredentials = (String) getCredentials(info);
     if (StrUtil.isNotBlank(jwtToken.getPassword())) {
       // 明文密码加密
-      String tokenCredentials = Md5Util.encode(jwtToken.getPassword(), CommonConsts.DEFAULT_SALT);
+      String tokenCredentials = Md5Util.encode(jwtToken.getPassword(), jwtToken.getUuid());
       if (!accountCredentials.equals(tokenCredentials)) {
         throw new DisabledAccountException("密码不正确！");
       }

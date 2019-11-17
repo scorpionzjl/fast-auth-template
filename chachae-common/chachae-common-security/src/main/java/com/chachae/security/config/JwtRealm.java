@@ -71,7 +71,7 @@ public class JwtRealm extends AuthorizingRealm {
             : JwtUtil.getAttribute(jwtToken.getToken(), "username");
     User user = authService.queryUserUsername(username);
     if (ObjectUtil.isEmpty(user)) {
-      throw new DisabledAccountException(REnum.NOT_SING_IN.desc);
+      throw new DisabledAccountException(REnum.NOT_EXIST.desc);
     } else {
       jwtToken.setUuid(user.getUuid());
       if (StrUtil.isBlank(jwtToken.getUsername())) {

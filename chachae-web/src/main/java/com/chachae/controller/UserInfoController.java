@@ -1,6 +1,6 @@
 package com.chachae.controller;
 
-import com.chachae.common.Result;
+import com.chachae.core.bean.Result;
 import com.chachae.core.entity.bo.UserInfo;
 import com.chachae.core.entity.vo.UserInfoVO;
 import com.chachae.service.UserInfoService;
@@ -23,24 +23,24 @@ public class UserInfoController {
   @GetMapping("/list")
   public Result list() {
     List<UserInfoVO> list = this.userInfoService.queryAll();
-    return Result.success("获取成功", list);
+    return Result.ok(list);
   }
 
   @GetMapping("/query/{uuid}")
   public Result list(@PathVariable String uuid) {
     UserInfoVO vo = this.userInfoService.queryByUuid(uuid);
-    return Result.success("获取成功", vo);
+    return Result.ok(vo);
   }
 
   @PutMapping("/update")
   public Result update(@Valid UserInfo userInfo) {
     this.userInfoService.update(userInfo);
-    return Result.success("更新成功");
+    return Result.ok();
   }
 
   @GetMapping("/query")
   public Result fuzzyQuery(String name, Integer deptId) {
     List<UserInfoVO> voList = this.userInfoService.fuzzyQuery(name, deptId);
-    return Result.success("获取成功", voList);
+    return Result.ok(voList);
   }
 }

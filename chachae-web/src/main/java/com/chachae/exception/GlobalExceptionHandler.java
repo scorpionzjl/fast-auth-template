@@ -1,6 +1,7 @@
 package com.chachae.exception;
 
-import com.chachae.common.Result;
+import com.chachae.core.bean.Result;
+import com.chachae.core.enums.REnum;
 import com.chachae.core.exception.ApiException;
 import com.chachae.core.utils.DateUtil;
 import com.google.common.collect.Maps;
@@ -35,7 +36,7 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(ApiException.class)
   public Result serviceExceptionHandler(ApiException ex, HttpServletRequest request) {
     Map<String, Object> apiErrMap = exceptionMsgTemplate(ex, request);
-    return Result.fail("请求异常", apiErrMap);
+    return Result.fail(ex.getCode(), REnum.FAIL.desc, apiErrMap);
   }
 
   /**
@@ -48,7 +49,7 @@ public class GlobalExceptionHandler {
   public Result handleValidationExceptions(BindException ex) {
     List<ObjectError> allErrors = ex.getBindingResult().getAllErrors();
     Map<String, String> errors = validExceptionTemplate(allErrors);
-    return Result.fail("表单请求数据校验不通过", errors);
+    return Result.fail(REnum.ARG_ERROR.val, REnum.ARG_ERROR.desc, errors);
   }
 
   /**
@@ -61,7 +62,7 @@ public class GlobalExceptionHandler {
   public Result handleValidationExceptions(MethodArgumentNotValidException ex) {
     List<ObjectError> allErrors = ex.getBindingResult().getAllErrors();
     Map<String, String> errors = validExceptionTemplate(allErrors);
-    return Result.fail("Json 请求数据校验不通过", errors);
+    return Result.fail(REnum.ARG_ERROR.desc, errors);
   }
 
   /**
@@ -73,7 +74,7 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(Exception.class)
   public Result unknownExceptionHandler(Exception ex, HttpServletRequest request) {
     Map<String, Object> apiErrMap = exceptionMsgTemplate(ex, request);
-    return Result.fail("未知异常", apiErrMap);
+    return Result.fail(REnum.SYSTEM_ERROR.val, REnum.SYSTEM_ERROR.desc, apiErrMap);
   }
 
   private Map<String, String> validExceptionTemplate(List<ObjectError> allErrors) {
@@ -96,7 +97,6 @@ public class GlobalExceptionHandler {
     log.error("异常发生时间：{}", time);
     log.error("异常接口：{}", url);
     log.error("异常消息：{}", message);
-    apiErrMap.put("time", time);
     apiErrMap.put("url", url);
     apiErrMap.put("message", message);
     return apiErrMap;

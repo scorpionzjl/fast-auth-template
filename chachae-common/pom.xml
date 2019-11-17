@@ -8,17 +8,33 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    
+
     <artifactId>chachae-common</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>chachae-common-core</module>
         <module>chachae-common-security</module>
+        <module>chachae-common-redis</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
-          
+            <dependency>
+                <groupId>com.chachae</groupId>
+                <artifactId>chachae-common-core</artifactId>
+                <version>${module.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.chachae</groupId>
+                <artifactId>chachae-common-security</artifactId>
+                <version>${module.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.chachae</groupId>
+                <artifactId>chachae-common-redis</artifactId>
+                <version>${module.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

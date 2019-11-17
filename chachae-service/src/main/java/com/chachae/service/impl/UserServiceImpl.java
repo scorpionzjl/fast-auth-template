@@ -5,6 +5,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.chachae.core.entity.bo.User;
 import com.chachae.core.entity.bo.UserInfo;
 import com.chachae.core.exception.ApiException;
+import com.chachae.core.utils.Md5Util;
 import com.chachae.dao.UserDao;
 import com.chachae.dao.UserInfoDao;
 import com.chachae.service.UserService;
@@ -49,6 +50,8 @@ public class UserServiceImpl implements UserService {
     // 创建uuid
     String uuid = IdUtil.simpleUUID();
     user.setUuid(uuid);
+    // 加密规则：MD5+UUID
+    user.setPassword(Md5Util.encode(user.getPassword(), uuid));
     this.userDao.insertSelective(user);
     UserInfo bo = new UserInfo();
     bo.setUuid(uuid);

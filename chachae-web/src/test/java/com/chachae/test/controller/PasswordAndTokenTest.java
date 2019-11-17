@@ -16,7 +16,7 @@ public class PasswordAndTokenTest {
 
   @Test
   public void test() {
-    String encode = Md5Util.encode("123", CommonConsts.DEFAULT_SALT);
+    String encode = Md5Util.encode("123", "1");
     System.out.println("加密后的密码：" + encode);
     String token = JwtUtil.sign("1", "admin", encode);
     System.out.println("token : "+token);

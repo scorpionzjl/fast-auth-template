@@ -68,11 +68,4 @@ public class JwtUtil {
       return null;
     }
   }
-
-  public static void main(String[] args) {
-    String token = sign("1", "admin", "123");
-    System.out.println("token:" + token);
-    boolean verifyFlag = verify(token, "123");
-    System.out.println("token是否验证通过：" + verifyFlag);
-  }
 }

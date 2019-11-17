@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * 认证业务实现
+ *
  * @author chachae
  * @date 2019/11/14 21:30
  */

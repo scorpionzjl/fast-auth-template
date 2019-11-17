@@ -1,7 +1,6 @@
 package com.chachae.security.service;
 
 import com.chachae.core.entity.bo.User;
-import com.chachae.security.jwt.JwtToken;
 
 import java.util.Set;
 
@@ -11,6 +10,12 @@ import java.util.Set;
  */
 public interface AuthService {
 
+  /**
+   * 登录
+   *
+   * @param user 登录信息
+   * @return token
+   */
   String login(User user);
 
   /**

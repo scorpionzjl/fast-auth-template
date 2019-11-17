@@ -1,8 +1,9 @@
 package com.chachae.controller;
 
-import cn.hutool.core.util.ObjectUtil;
-import com.chachae.common.Result;
+import com.chachae.core.bean.Result;
+import com.chachae.core.constant.CommonConsts;
 import com.chachae.core.entity.bo.User;
+import com.chachae.core.utils.Md5Util;
 import com.chachae.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,11 +30,8 @@ public class UserController {
    */
   @GetMapping("/list")
   public Result list() {
-    List<User> userList = this.userService.queryAll();
-    if (ObjectUtil.isNotEmpty(userList)) {
-      return Result.success("获取成功", userList);
-    }
-    return Result.success("没有数据");
+    List<User> list = this.userService.queryAll();
+    return Result.ok(list);
   }
 
   /**
@@ -47,7 +45,7 @@ public class UserController {
     User user = this.userService.queryByPrimaryKey(uuid);
     // 去除密码等敏感信息
     user.setPassword(null);
-    return Result.success("获取成功", user);
+    return Result.ok(user);
   }
 
   /**
@@ -59,7 +57,7 @@ public class UserController {
   @DeleteMapping("/delete/{uuid}")
   public Result delete(@PathVariable String uuid) {
     this.userService.deleteByUuid(uuid);
-    return Result.success("删除成功");
+    return Result.ok();
   }
 
   /**
@@ -71,7 +69,7 @@ public class UserController {
   @PutMapping("/update")
   public Result delete(@Valid User user) {
     this.userService.update(user);
-    return Result.success("更新成功");
+    return Result.ok();
   }
 
   /**
@@ -83,6 +81,6 @@ public class UserController {
   @PostMapping("/add")
   public Result add(@Valid User user) {
     this.userService.add(user);
-    return Result.success("增加成功");
+    return Result.ok();
   }
 }

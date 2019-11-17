@@ -1,12 +1,13 @@
 package com.chachae.core.entity.bo;
 
+import com.chachae.core.bean.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
 
 /**
  * @author chachae
@@ -15,7 +16,8 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @Table(name = "t_permission")
-public class Permission implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class Permission extends BaseEntity {
 
   @Id private Integer id;
 

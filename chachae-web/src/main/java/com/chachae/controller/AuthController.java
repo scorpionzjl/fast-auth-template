@@ -1,6 +1,6 @@
 package com.chachae.controller;
 
-import com.chachae.common.Result;
+import com.chachae.core.bean.Result;
 import com.chachae.core.entity.bo.User;
 import com.chachae.security.service.AuthService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +24,6 @@ public class AuthController {
   @PostMapping("/login")
   public Result auth(User user) {
     String token = authService.login(user);
-    return Result.success("登录成功", token);
+    return Result.ok(token);
   }
 }

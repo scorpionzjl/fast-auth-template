@@ -1,6 +1,6 @@
 package com.chachae.controller;
 
-import com.chachae.common.Result;
+import com.chachae.core.bean.Result;
 import com.chachae.core.entity.bo.Department;
 import com.chachae.service.DepartmentService;
 import org.springframework.web.bind.annotation.*;
@@ -21,36 +21,36 @@ public class DepartmentController {
   @GetMapping("/list")
   public Result list() {
     List<Department> list = this.departmentService.queryAll();
-    return Result.success("获取成功", list);
+    return Result.ok(list);
   }
 
   @GetMapping("/query/{parentId}")
   public Result treeList(@PathVariable Integer parentId) {
     List<Department> list = this.departmentService.queryTree(parentId);
-    return Result.success("获取成功", list);
+    return Result.ok(list);
   }
 
   @GetMapping("/query")
   public Result fuzzyList(String name) {
     List<Department> list = this.departmentService.fuzzyQuery(name);
-    return Result.success("获取成功", list);
+    return Result.ok(list);
   }
 
   @PostMapping("/add")
   public Result add(Department department) {
     this.departmentService.add(department);
-    return Result.success("增加成功");
+    return Result.ok();
   }
 
   @DeleteMapping("/delete/{id}")
   public Result delete(@PathVariable Integer id) {
     this.departmentService.deleteByPrimaryKey(id);
-    return Result.success("删除成功");
+    return Result.ok();
   }
 
   @PutMapping("/update")
   public Result update(Department department) {
     this.departmentService.update(department);
-    return Result.success("更新成功");
+    return Result.ok();
   }
 }

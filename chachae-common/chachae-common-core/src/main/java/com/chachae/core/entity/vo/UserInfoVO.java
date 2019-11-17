@@ -1,6 +1,8 @@
 package com.chachae.core.entity.vo;
 
+import com.chachae.core.bean.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -9,7 +11,8 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class UserInfoVO {
+@EqualsAndHashCode(callSuper = true)
+public class UserInfoVO extends BaseEntity {
 
   private Integer id;
 

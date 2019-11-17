@@ -1,6 +1,7 @@
 package com.chachae.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.chachae.core.entity.bo.UserInfo;
 import com.chachae.core.entity.vo.UserInfoVO;
 import com.chachae.core.exception.ApiException;
@@ -81,13 +82,13 @@ public class UserInfoServiceImpl implements UserInfoService {
   private boolean isEmailExist(Integer id, String email) {
     // 先检查是否和自己的一样。一样则允许重复更新
     UserInfo info = this.userInfoDao.selectByPrimaryKey(id);
-    if (info.getEmail().equals(email)) {
-      return false;
+    if (StrUtil.isEmpty(info.getEmail())) {
+      Example example = new Example(UserInfo.class);
+      Example.Criteria criteria = example.createCriteria();
+      criteria.andEqualTo("email", email);
+      List<UserInfo> list = this.userInfoDao.selectByExample(example);
+      return ObjectUtil.isNotEmpty(list);
     }
-    Example example = new Example(UserInfo.class);
-    Example.Criteria criteria = example.createCriteria();
-    criteria.andEqualTo("email", email);
-    List<UserInfo> list = this.userInfoDao.selectByExample(example);
-    return ObjectUtil.isNotEmpty(list);
+    return !info.getEmail().equals(email);
   }
 }
