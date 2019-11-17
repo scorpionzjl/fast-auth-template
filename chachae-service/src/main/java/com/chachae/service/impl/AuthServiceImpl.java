@@ -2,13 +2,13 @@ package com.chachae.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.chachae.core.entity.bo.Permission;
-import com.chachae.core.entity.bo.User;
-import com.chachae.core.exception.ApiException;
+import com.chachae.common.core.entity.bo.Permission;
+import com.chachae.common.core.entity.bo.User;
+import com.chachae.common.core.exception.ApiException;
 import com.chachae.dao.AuthDao;
 import com.chachae.dao.PermissionDao;
-import com.chachae.security.jwt.JwtToken;
-import com.chachae.security.service.AuthService;
+import com.chachae.common.security.jwt.JwtToken;
+import com.chachae.common.security.service.AuthService;
 import com.google.common.collect.Sets;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;

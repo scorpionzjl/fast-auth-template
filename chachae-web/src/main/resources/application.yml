@@ -11,7 +11,7 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
-  type-aliases-package: com.chachae.core.entity
+  type-aliases-package: com.chachae.common.core.entity
   mapper-locations: classpath:mappers/*Mapper.xml
 
 server:

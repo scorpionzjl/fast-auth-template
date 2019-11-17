@@ -1,11 +1,12 @@
 package com.chachae.exception;
 
-import com.chachae.core.bean.Result;
-import com.chachae.core.enums.REnum;
-import com.chachae.core.exception.ApiException;
-import com.chachae.core.utils.DateUtil;
+import com.chachae.common.core.bean.Result;
+import com.chachae.common.core.enums.REnum;
+import com.chachae.common.core.exception.ApiException;
+import com.chachae.common.core.utils.DateUtil;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -37,6 +38,19 @@ public class GlobalExceptionHandler {
   public Result serviceExceptionHandler(ApiException ex, HttpServletRequest request) {
     Map<String, Object> apiErrMap = exceptionMsgTemplate(ex, request);
     return Result.fail(ex.getCode(), REnum.FAIL.desc, apiErrMap);
+  }
+
+  /**
+   * 权限不足异常
+   *
+   * @param ex 异常
+   * @param request 请求信息
+   * @return 异常响应信息
+   */
+  @ExceptionHandler(UnauthorizedException.class)
+  public Result unauthorizedExceptionHandler(UnauthorizedException ex, HttpServletRequest request) {
+    Map<String, Object> apiErrMap = exceptionMsgTemplate(ex, request);
+    return Result.fail(REnum.UN_AUTHORIZED.val, REnum.UN_AUTHORIZED.desc, apiErrMap);
   }
 
   /**

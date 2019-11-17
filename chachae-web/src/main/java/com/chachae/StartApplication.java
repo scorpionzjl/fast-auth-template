@@ -1,6 +1,6 @@
 package com.chachae;
 
-import com.chachae.security.annotation.EnableShiro;
+import com.chachae.common.security.annotation.EnableShiro;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import tk.mybatis.spring.annotation.MapperScan;

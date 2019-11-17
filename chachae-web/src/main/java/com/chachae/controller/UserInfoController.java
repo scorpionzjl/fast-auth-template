@@ -1,9 +1,10 @@
 package com.chachae.controller;
 
-import com.chachae.core.bean.Result;
-import com.chachae.core.entity.bo.UserInfo;
-import com.chachae.core.entity.vo.UserInfoVO;
+import com.chachae.common.core.bean.Result;
+import com.chachae.common.core.entity.bo.UserInfo;
+import com.chachae.common.core.entity.vo.UserInfoVO;
 import com.chachae.service.UserInfoService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

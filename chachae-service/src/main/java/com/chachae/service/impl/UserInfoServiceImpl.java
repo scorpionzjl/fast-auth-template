@@ -2,10 +2,10 @@ package com.chachae.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.chachae.core.entity.bo.UserInfo;
-import com.chachae.core.entity.vo.UserInfoVO;
-import com.chachae.core.exception.ApiException;
-import com.chachae.core.utils.BeanCopyUtil;
+import com.chachae.common.core.entity.bo.UserInfo;
+import com.chachae.common.core.entity.vo.UserInfoVO;
+import com.chachae.common.core.exception.ApiException;
+import com.chachae.common.core.utils.BeanCopyUtil;
 import com.chachae.dao.UserInfoDao;
 import com.chachae.service.UserInfoService;
 import com.google.common.collect.Lists;
@@ -28,7 +28,7 @@ public class UserInfoServiceImpl implements UserInfoService {
   public void update(UserInfo userInfo) {
     Integer id = userInfo.getId();
     String email = userInfo.getEmail();
-    // 先判断是否有填写油箱
+    // 先判断是否有填写邮箱
     if (ObjectUtil.isNotEmpty(email)) {
       if (isEmailExist(id, email)) {
         throw ApiException.argError("邮箱已被注册");

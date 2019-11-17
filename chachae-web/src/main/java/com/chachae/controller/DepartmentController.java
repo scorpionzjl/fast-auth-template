@@ -1,8 +1,9 @@
 package com.chachae.controller;
 
-import com.chachae.core.bean.Result;
-import com.chachae.core.entity.bo.Department;
+import com.chachae.common.core.bean.Result;
+import com.chachae.common.core.entity.bo.Department;
 import com.chachae.service.DepartmentService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -37,18 +38,21 @@ public class DepartmentController {
   }
 
   @PostMapping("/add")
+  @RequiresPermissions("department:add")
   public Result add(Department department) {
     this.departmentService.add(department);
     return Result.ok();
   }
 
   @DeleteMapping("/delete/{id}")
+  @RequiresPermissions("department:delete")
   public Result delete(@PathVariable Integer id) {
     this.departmentService.deleteByPrimaryKey(id);
     return Result.ok();
   }
 
   @PutMapping("/update")
+  @RequiresPermissions("department:update")
   public Result update(Department department) {
     this.departmentService.update(department);
     return Result.ok();

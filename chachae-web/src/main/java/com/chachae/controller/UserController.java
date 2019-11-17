@@ -1,10 +1,9 @@
 package com.chachae.controller;
 
-import com.chachae.core.bean.Result;
-import com.chachae.core.constant.CommonConsts;
-import com.chachae.core.entity.bo.User;
-import com.chachae.core.utils.Md5Util;
+import com.chachae.common.core.bean.Result;
+import com.chachae.common.core.entity.bo.User;
 import com.chachae.service.UserService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -55,6 +54,7 @@ public class UserController {
    * @return 删除情况 todo 权限校验
    */
   @DeleteMapping("/delete/{uuid}")
+  @RequiresPermissions("user:delete")
   public Result delete(@PathVariable String uuid) {
     this.userService.deleteByUuid(uuid);
     return Result.ok();
@@ -67,7 +67,8 @@ public class UserController {
    * @return 更新情况 todo 1. 权限校验 2. 密码加密
    */
   @PutMapping("/update")
-  public Result delete(@Valid User user) {
+  @RequiresPermissions("user:update")
+  public Result update(@Valid User user) {
     this.userService.update(user);
     return Result.ok();
   }
@@ -79,6 +80,7 @@ public class UserController {
    * @return 增加情况 todo 1. 权限校验 2. 密码校验
    */
   @PostMapping("/add")
+  @RequiresPermissions("user:add")
   public Result add(@Valid User user) {
     this.userService.add(user);
     return Result.ok();

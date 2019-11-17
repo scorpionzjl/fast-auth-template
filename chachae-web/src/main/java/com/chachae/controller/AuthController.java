@@ -1,8 +1,8 @@
 package com.chachae.controller;
 
-import com.chachae.core.bean.Result;
-import com.chachae.core.entity.bo.User;
-import com.chachae.security.service.AuthService;
+import com.chachae.common.core.bean.Result;
+import com.chachae.common.core.entity.bo.User;
+import com.chachae.common.security.service.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

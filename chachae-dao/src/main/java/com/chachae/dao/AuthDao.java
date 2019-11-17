@@ -1,6 +1,6 @@
 package com.chachae.dao;
 
-import com.chachae.core.entity.bo.User;
+import com.chachae.common.core.entity.bo.User;
 import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
 

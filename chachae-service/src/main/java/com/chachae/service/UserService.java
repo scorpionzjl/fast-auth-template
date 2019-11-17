@@ -1,6 +1,7 @@
 package com.chachae.service;
 
-import com.chachae.core.entity.bo.User;
+import com.chachae.common.core.entity.bo.User;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ public interface UserService {
    *
    * @param user 用户登陆信息
    */
+  @Transactional(rollbackFor = Exception.class)
   void update(User user);
 
   /**

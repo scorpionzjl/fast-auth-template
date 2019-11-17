@@ -3,10 +3,10 @@ package com.chachae.service.impl;
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.chachae.core.entity.bo.Department;
-import com.chachae.core.exception.ApiException;
-import com.chachae.core.utils.DateUtil;
-import com.chachae.core.utils.LevelCalculateUtil;
+import com.chachae.common.core.entity.bo.Department;
+import com.chachae.common.core.exception.ApiException;
+import com.chachae.common.core.utils.DateUtil;
+import com.chachae.common.core.utils.LevelCalculateUtil;
 import com.chachae.dao.DepartmentDao;
 import com.chachae.service.DepartmentService;
 import com.google.common.collect.Lists;
@@ -125,6 +125,9 @@ public class DepartmentServiceImpl implements DepartmentService {
 
   private boolean isExist(Integer id) {
     Department dept = this.departmentDao.selectByPrimaryKey(id);
+    if (ObjectUtil.isEmpty(dept)) {
+      throw ApiException.argError("不存在该部门");
+    }
     Integer parentId = dept.getParentId();
     List<Department> list = queryTree(id);
     // 非顶级部门或者顶级部门下不存在分支部门

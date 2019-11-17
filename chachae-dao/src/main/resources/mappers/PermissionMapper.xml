@@ -3,7 +3,7 @@
 <mapper namespace="com.chachae.dao.PermissionDao">
 
     <select id="queryByUuid" parameterType="string" resultType="Permission">
-        SELECT * FROM t_permission AS auth WHERE auth.id IN (SELECT id FROM t_user WHERE uuid =
-        #{uuid,jdbcType=VARCHAR})
+        SELECT * FROM t_permission AS auth WHERE auth.id IN (SELECT permission_id FROM t_role_permission AS role_auth
+        WHERE role_auth.role_id IN (SELECT role FROM t_user WHERE uuid = #{uuid,jdbcType=VARCHAR}))
     </select>
 </mapper>

@@ -2,15 +2,15 @@ package com.chachae.service.impl;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.chachae.core.entity.bo.User;
-import com.chachae.core.entity.bo.UserInfo;
-import com.chachae.core.exception.ApiException;
-import com.chachae.core.utils.Md5Util;
+import cn.hutool.core.util.StrUtil;
+import com.chachae.common.core.entity.bo.User;
+import com.chachae.common.core.entity.bo.UserInfo;
+import com.chachae.common.core.exception.ApiException;
+import com.chachae.common.core.utils.Md5Util;
 import com.chachae.dao.UserDao;
 import com.chachae.dao.UserInfoDao;
 import com.chachae.service.UserService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
@@ -37,8 +37,11 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  @Transactional(rollbackFor = Exception.class)
   public void update(User user) {
+    String password = user.getPassword();
+    if (StrUtil.isNotBlank(password)) {
+      user.setPassword(Md5Util.encode(password, user.getUuid()));
+    }
     this.userDao.updateByPrimaryKeySelective(user);
   }
 

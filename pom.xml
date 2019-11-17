@@ -3,25 +3,23 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.chachae</groupId>
     <artifactId>parent-test</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <!-- 模块管理 -->
     <modules>
         <module>chachae-dao</module>
         <module>chachae-service</module>
         <module>chachae-web</module>
         <module>chachae-common</module>
     </modules>
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.2.0.RELEASE</version>
         <relativePath/>
     </parent>
-
     <!-- 统一依赖版本管理 -->
     <properties>
         <module.version>1.0-SNAPSHOT</module.version>
@@ -36,10 +34,10 @@
         <valid.version>6.1.0.Final</valid.version>
         <joda.version>2.10.5</joda.version>
     </properties>
-
     <!-- 模块统一管理 -->
     <dependencyManagement>
         <dependencies>
+            <!--////////////// 项目模块 /////////////////////-->
             <dependency>
                 <groupId>com.chachae</groupId>
                 <artifactId>chachae-dao</artifactId>
@@ -60,6 +58,7 @@
                 <artifactId>chachae-common</artifactId>
                 <version>${module.version}</version>
             </dependency>
+            <!--////////////// END /////////////////////-->
             <!-- mysql -->
             <dependency>
                 <groupId>mysql</groupId>
@@ -96,18 +95,6 @@
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
-            <!-- shiro -->
-            <dependency>
-                <groupId>org.apache.shiro</groupId>
-                <artifactId>shiro-core</artifactId>
-                <version>${shiro.version}</version>
-            </dependency>
-            <!-- shiro-spring -->
-            <dependency>
-                <groupId>org.apache.shiro</groupId>
-                <artifactId>shiro-spring</artifactId>
-                <version>${shiro.version}</version>
-            </dependency>
             <!-- jwt -->
             <dependency>
                 <groupId>com.auth0</groupId>
@@ -125,6 +112,12 @@
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
                 <version>${joda.version}</version>
+            </dependency>
+            <!-- shiro starter -->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring-boot-web-starter</artifactId>
+                <version>${shiro.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

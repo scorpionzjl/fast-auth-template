@@ -1,6 +1,6 @@
 package com.chachae.service;
 
-import com.chachae.core.entity.bo.Department;
+import com.chachae.common.core.entity.bo.Department;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

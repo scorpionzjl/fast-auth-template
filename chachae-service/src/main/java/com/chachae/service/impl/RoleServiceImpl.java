@@ -1,6 +1,6 @@
 package com.chachae.service.impl;
 
-import com.chachae.core.entity.bo.Role;
+import com.chachae.common.core.entity.bo.Role;
 import com.chachae.dao.RoleDao;
 import com.chachae.service.RoleService;
 import org.springframework.stereotype.Service;

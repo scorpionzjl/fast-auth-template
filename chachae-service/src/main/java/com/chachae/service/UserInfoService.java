@@ -1,7 +1,7 @@
 package com.chachae.service;
 
-import com.chachae.core.entity.bo.UserInfo;
-import com.chachae.core.entity.vo.UserInfoVO;
+import com.chachae.common.core.entity.bo.UserInfo;
+import com.chachae.common.core.entity.vo.UserInfoVO;
 
 import java.util.List;
 
