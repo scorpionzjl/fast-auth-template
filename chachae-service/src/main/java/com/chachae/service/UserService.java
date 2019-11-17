@@ -1,7 +1,6 @@
 package com.chachae.service;
 
-import com.chachae.entity.bo.User;
-import org.apache.ibatis.annotations.Param;
+import com.chachae.core.entity.bo.User;
 
 import java.util.List;
 

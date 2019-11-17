@@ -1,9 +1,7 @@
 package com.chachae.service;
 
-import com.chachae.entity.bo.UserInfo;
-import com.chachae.entity.vo.UserInfoVO;
-import com.chachae.exception.ServiceException;
-import org.springframework.transaction.annotation.Transactional;
+import com.chachae.core.entity.bo.UserInfo;
+import com.chachae.core.entity.vo.UserInfoVO;
 
 import java.util.List;
 

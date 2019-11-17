@@ -3,12 +3,12 @@ package com.chachae.service.impl;
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.chachae.core.entity.bo.Department;
+import com.chachae.core.exception.ApiException;
+import com.chachae.core.utils.DateUtil;
+import com.chachae.core.utils.LevelCalculateUtil;
 import com.chachae.dao.DepartmentDao;
-import com.chachae.entity.bo.Department;
-import com.chachae.exception.ServiceException;
 import com.chachae.service.DepartmentService;
-import com.chachae.utils.DateUtil;
-import com.chachae.utils.LevelCalculateUtil;
 import com.google.common.collect.Lists;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -117,7 +117,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     List<Department> list = this.departmentDao.selectAll();
     for (Department dept : list) {
       if (dept.getName().equals(name)) {
-        throw new ServiceException("存在同名部门，不允许添加！");
+        throw ApiException.argError("存在同名部门，不允许添加！");
       }
     }
     return true;
@@ -131,6 +131,6 @@ public class DepartmentServiceImpl implements DepartmentService {
     if (parentId != 0 || ObjectUtil.isEmpty(list)) {
       return true;
     }
-    throw new ServiceException("该部门下存在二级部门，不允许删除！");
+    throw ApiException.argError("该部门下存在二级部门，不允许删除！");
   }
 }

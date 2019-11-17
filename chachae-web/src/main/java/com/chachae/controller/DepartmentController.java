@@ -1,7 +1,7 @@
 package com.chachae.controller;
 
 import com.chachae.common.Result;
-import com.chachae.entity.bo.Department;
+import com.chachae.core.entity.bo.Department;
 import com.chachae.service.DepartmentService;
 import org.springframework.web.bind.annotation.*;
 

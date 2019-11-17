@@ -2,7 +2,7 @@ package com.chachae.controller;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.chachae.common.Result;
-import com.chachae.entity.bo.User;
+import com.chachae.core.entity.bo.User;
 import com.chachae.service.UserService;
 import org.springframework.web.bind.annotation.*;
 

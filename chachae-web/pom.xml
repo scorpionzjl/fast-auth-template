@@ -12,11 +12,6 @@
     <artifactId>chachae-web</artifactId>
 
     <dependencies>
-        <!-- web starter -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
         <!-- service -->
         <dependency>
             <groupId>com.chachae</groupId>

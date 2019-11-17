@@ -1,7 +1,7 @@
 package com.chachae.service.impl;
 
+import com.chachae.core.entity.bo.Permission;
 import com.chachae.dao.PermissionDao;
-import com.chachae.entity.bo.Permission;
 import com.chachae.service.PermissionService;
 import org.springframework.stereotype.Service;
 

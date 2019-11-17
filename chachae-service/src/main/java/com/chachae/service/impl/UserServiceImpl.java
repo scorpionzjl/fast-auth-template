@@ -2,11 +2,11 @@ package com.chachae.service.impl;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
+import com.chachae.core.entity.bo.User;
+import com.chachae.core.entity.bo.UserInfo;
+import com.chachae.core.exception.ApiException;
 import com.chachae.dao.UserDao;
 import com.chachae.dao.UserInfoDao;
-import com.chachae.entity.bo.User;
-import com.chachae.entity.bo.UserInfo;
-import com.chachae.exception.ServiceException;
 import com.chachae.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
   @Override
   public void add(User user) {
     if (isExist(user.getUsername())) {
-      throw new ServiceException("用户名已存在！");
+      throw ApiException.argError("用户名已存在！");
     }
     // 创建uuid
     String uuid = IdUtil.simpleUUID();

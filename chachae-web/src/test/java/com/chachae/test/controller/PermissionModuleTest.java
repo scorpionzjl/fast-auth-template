@@ -2,8 +2,8 @@ package com.chachae.test.controller;
 
 import cn.hutool.core.lang.Console;
 import com.chachae.StartApplication;
-import com.chachae.entity.bo.Permission;
-import com.chachae.service.AuthService;
+import com.chachae.core.entity.bo.Permission;
+import com.chachae.security.service.AuthService;
 import com.chachae.service.PermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;

@@ -12,8 +12,7 @@
         <module>chachae-dao</module>
         <module>chachae-service</module>
         <module>chachae-web</module>
-        <module>chachae-model</module>
-        <module>chachae-utils</module>
+        <module>chachae-common</module>
     </modules>
 
     <parent>
@@ -54,6 +53,16 @@
             <dependency>
                 <groupId>com.chachae</groupId>
                 <artifactId>chachae-utils</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.chachae</groupId>
+                <artifactId>chachae-common-core</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.chachae</groupId>
+                <artifactId>chachae-common-security</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <!-- mysql -->

@@ -1,6 +1,6 @@
 package com.chachae.service;
 
-import com.chachae.entity.bo.Permission;
+import com.chachae.core.entity.bo.Permission;
 
 import java.util.List;
 

@@ -1,12 +1,12 @@
 package com.chachae.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.chachae.core.entity.bo.UserInfo;
+import com.chachae.core.entity.vo.UserInfoVO;
+import com.chachae.core.exception.ApiException;
+import com.chachae.core.utils.BeanCopyUtil;
 import com.chachae.dao.UserInfoDao;
-import com.chachae.entity.bo.UserInfo;
-import com.chachae.entity.vo.UserInfoVO;
-import com.chachae.exception.ServiceException;
 import com.chachae.service.UserInfoService;
-import com.chachae.utils.BeanCopyUtil;
 import com.google.common.collect.Lists;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -30,7 +30,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     // 先判断是否有填写油箱
     if (ObjectUtil.isNotEmpty(email)) {
       if (isEmailExist(id, email)) {
-        throw new ServiceException("邮箱已被注册！");
+        throw ApiException.argError("邮箱已被注册");
       }
     }
     this.userInfoDao.updateByPrimaryKeySelective(userInfo);
@@ -52,6 +52,7 @@ public class UserInfoServiceImpl implements UserInfoService {
   public UserInfoVO queryByUuid(String uuid) {
     UserInfo boList = this.userInfoDao.queryByUuid(uuid);
     UserInfoVO vo = BeanCopyUtil.copyObject(boList, UserInfoVO.class);
+    assert vo != null;
     vo.setName(boList.getName());
     vo.setRole(boList.getUser().getRole());
     vo.setUsername(boList.getUser().getUsername());
@@ -62,6 +63,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     List<UserInfoVO> voList = Lists.newArrayList();
     for (UserInfo userInfo : boList) {
       UserInfoVO vo = BeanCopyUtil.copyObject(userInfo, UserInfoVO.class);
+      assert vo != null;
       vo.setName(userInfo.getName());
       vo.setRole(userInfo.getUser().getRole());
       vo.setUsername(userInfo.getUser().getUsername());

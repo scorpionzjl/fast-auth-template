@@ -1,8 +1,8 @@
 package com.chachae.controller;
 
 import com.chachae.common.Result;
-import com.chachae.entity.bo.UserInfo;
-import com.chachae.entity.vo.UserInfoVO;
+import com.chachae.core.entity.bo.UserInfo;
+import com.chachae.core.entity.vo.UserInfoVO;
 import com.chachae.service.UserInfoService;
 import org.springframework.web.bind.annotation.*;
 

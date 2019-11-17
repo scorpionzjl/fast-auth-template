@@ -1,8 +1,8 @@
 package com.chachae.exception;
 
 import com.chachae.common.Result;
-import com.chachae.security.exception.SecurityModuleException;
-import com.chachae.utils.DateUtil;
+import com.chachae.core.exception.ApiException;
+import com.chachae.core.utils.DateUtil;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
@@ -32,27 +32,10 @@ public class GlobalExceptionHandler {
    * @param ex 异常
    * @return 异常响应信息
    */
-  @ExceptionHandler(ServiceException.class)
-  public Result serviceExceptionHandler(ServiceException ex, HttpServletRequest request) {
+  @ExceptionHandler(ApiException.class)
+  public Result serviceExceptionHandler(ApiException ex, HttpServletRequest request) {
     Map<String, Object> apiErrMap = exceptionMsgTemplate(ex, request);
-    return Result.fail("业务层异常", apiErrMap);
-  }
-
-  /**
-   * 控制层异常
-   *
-   * @param ex 异常
-   * @return 异常响应信息
-   */
-  @ExceptionHandler(ControllerException.class)
-  public Result controllerExceptionHandler(ControllerException ex, HttpServletRequest request) {
-    Map<String, Object> apiErrMap = exceptionMsgTemplate(ex, request);
-    return Result.fail("控制层异常", apiErrMap);
-  }
-
-  @ExceptionHandler(SecurityModuleException.class)
-  public Result disableAccountExceptionHandler(SecurityModuleException ex) {
-    return Result.fail("安全模块异常", ex.getMessage());
+    return Result.fail("请求异常", apiErrMap);
   }
 
   /**
@@ -105,6 +88,9 @@ public class GlobalExceptionHandler {
 
   private Map<String, Object> exceptionMsgTemplate(Exception ex, HttpServletRequest request) {
     String message = ex.getMessage();
+    if (ex instanceof ApiException) {
+      message = ((ApiException) ex).getMsg();
+    }
     String time = DateUtil.nowStr();
     String url = request.getRequestURI();
     log.error("异常发生时间：{}", time);

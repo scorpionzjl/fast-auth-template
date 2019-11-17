@@ -2,12 +2,16 @@ package com.chachae.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.chachae.core.entity.bo.Permission;
+import com.chachae.core.entity.bo.User;
+import com.chachae.core.exception.ApiException;
 import com.chachae.dao.AuthDao;
 import com.chachae.dao.PermissionDao;
-import com.chachae.entity.bo.Permission;
-import com.chachae.entity.bo.User;
-import com.chachae.service.AuthService;
+import com.chachae.security.jwt.JwtToken;
+import com.chachae.security.service.AuthService;
 import com.google.common.collect.Sets;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -24,6 +28,20 @@ public class AuthServiceImpl implements AuthService {
 
   @Resource private AuthDao authDao;
   @Resource private PermissionDao permissionDao;
+
+  @Override
+  public String login(User user) {
+    Subject subject = SecurityUtils.getSubject();
+    JwtToken token = new JwtToken();
+    token.setUsername(user.getUsername());
+    token.setPassword(user.getPassword());
+    try {
+      subject.login(token);
+    } catch (Exception e) {
+      throw ApiException.argError(e.getMessage());
+    }
+    return ((JwtToken) SecurityUtils.getSubject().getPrincipal()).getToken();
+  }
 
   @Override
   public User queryUserUsername(String username) {

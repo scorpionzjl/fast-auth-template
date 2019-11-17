@@ -1,12 +1,9 @@
 package com.chachae.controller;
 
 import com.chachae.common.Result;
-import com.chachae.exception.ControllerException;
-import com.chachae.security.jwt.JwtToken;
-import com.chachae.service.AuthService;
+import com.chachae.core.entity.bo.User;
+import com.chachae.security.service.AuthService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,17 +22,8 @@ public class AuthController {
   @Resource private AuthService authService;
 
   @PostMapping("/login")
-  public Result auth(String username, String password) {
-    Subject subject = SecurityUtils.getSubject();
-    JwtToken jwtToken = new JwtToken();
-    jwtToken.setUsername(username);
-    jwtToken.setPassword(password);
-    try {
-      subject.login(jwtToken);
-    } catch (Exception e) {
-      throw new ControllerException(e.getMessage());
-    }
-    String token = ((JwtToken) SecurityUtils.getSubject().getPrincipal()).getToken();
+  public Result auth(User user) {
+    String token = authService.login(user);
     return Result.success("登录成功", token);
   }
 }

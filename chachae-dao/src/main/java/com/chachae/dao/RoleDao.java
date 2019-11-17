@@ -1,6 +1,6 @@
 package com.chachae.dao;
 
-import com.chachae.entity.bo.Role;
+import com.chachae.core.entity.bo.Role;
 import tk.mybatis.mapper.common.Mapper;
 
 /**

@@ -12,11 +12,13 @@
     <artifactId>chachae-dao</artifactId>
 
     <dependencies>
-        <!-- entity -->
+
+
         <dependency>
             <groupId>com.chachae</groupId>
-            <artifactId>chachae-utils</artifactId>
+            <artifactId>chachae-common-security</artifactId>
         </dependency>
+
     </dependencies>
 
 </project>
