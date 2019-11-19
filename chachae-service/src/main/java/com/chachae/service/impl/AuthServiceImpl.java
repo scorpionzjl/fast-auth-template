@@ -5,6 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import com.chachae.common.core.entity.bo.Permission;
 import com.chachae.common.core.entity.bo.User;
 import com.chachae.common.core.exception.ApiException;
+import com.chachae.common.redis.utils.RedisUtil;
 import com.chachae.dao.AuthDao;
 import com.chachae.dao.PermissionDao;
 import com.chachae.common.security.jwt.JwtToken;

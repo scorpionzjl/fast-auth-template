@@ -16,5 +16,10 @@
             <groupId>com.chachae</groupId>
             <artifactId>chachae-dao</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.chachae</groupId>
+            <artifactId>chachae-common-redis</artifactId>
+            <version>${module.version}</version>
+        </dependency>
     </dependencies>
 </project>
