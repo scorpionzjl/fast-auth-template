@@ -19,7 +19,7 @@ public class RedisUtil {
    *
    * @return Jedis
    */
-  private static synchronized Jedis getJedis() {
+  private static Jedis getJedis() {
     return RedisDS.create().getJedis();
   }
 
@@ -29,7 +29,7 @@ public class RedisUtil {
    * @param key 键
    * @param value 值
    */
-  public static synchronized void set(String key, String value) {
+  public static void set(String key, String value) {
     try {
       value = StrUtil.isBlank(value) ? "" : value;
       Jedis jedis = getJedis();
@@ -46,7 +46,7 @@ public class RedisUtil {
    * @param key 键
    * @param value 值
    */
-  public static synchronized void set(byte[] key, byte[] value) {
+  public static void set(byte[] key, byte[] value) {
     try {
       Jedis jedis = getJedis();
       jedis.set(key, value);
@@ -63,7 +63,7 @@ public class RedisUtil {
    * @param value 值
    * @param seconds 以秒为单位
    */
-  public static synchronized void set(String key, String value, int seconds) {
+  public static void set(String key, String value, int seconds) {
     try {
       value = StrUtil.isBlank(value) ? "" : value;
       Jedis jedis = getJedis();
@@ -81,7 +81,7 @@ public class RedisUtil {
    * @param value 值
    * @param seconds 以秒为单位
    */
-  public static synchronized void set(byte[] key, byte[] value, int seconds) {
+  public static void set(byte[] key, byte[] value, int seconds) {
     try {
       Jedis jedis = getJedis();
       jedis.set(key, value);
@@ -98,7 +98,7 @@ public class RedisUtil {
    * @param key 键
    * @return value 值
    */
-  public static synchronized String get(String key) {
+  public static String get(String key) {
     Jedis jedis = getJedis();
     if (null == jedis) {
       return null;
@@ -114,7 +114,7 @@ public class RedisUtil {
    * @param key 键
    * @return value 值
    */
-  public static synchronized byte[] get(byte[] key) {
+  public static byte[] get(byte[] key) {
     Jedis jedis = getJedis();
     if (null == jedis) {
       return null;
@@ -129,7 +129,7 @@ public class RedisUtil {
    *
    * @param key 键
    */
-  public static synchronized void remove(String key) {
+  public static void remove(String key) {
     try {
       Jedis jedis = getJedis();
       jedis.del(key);
@@ -144,7 +144,7 @@ public class RedisUtil {
    *
    * @param key 键
    */
-  public static synchronized void remove(byte[] key) {
+  public static void remove(byte[] key) {
     try {
       Jedis jedis = getJedis();
       jedis.del(key);
@@ -160,7 +160,7 @@ public class RedisUtil {
    * @param key 键
    * @param strings 多个key
    */
-  public static synchronized void lpush(String key, String... strings) {
+  public static void lpush(String key, String... strings) {
     try {
       Jedis jedis = RedisUtil.getJedis();
       jedis.lpush(key, strings);
@@ -177,7 +177,7 @@ public class RedisUtil {
    * @param count 数量
    * @param value 值
    */
-  public static synchronized void lrem(String key, long count, String value) {
+  public static void lrem(String key, long count, String value) {
     try {
       Jedis jedis = RedisUtil.getJedis();
       jedis.lrem(key, count, value);
@@ -194,7 +194,7 @@ public class RedisUtil {
    * @param value 值
    * @param seconds 时间
    */
-  public static synchronized void sadd(String key, String value, int seconds) {
+  public static void sadd(String key, String value, int seconds) {
     try {
       Jedis jedis = RedisUtil.getJedis();
       jedis.sadd(key, value);
@@ -211,7 +211,7 @@ public class RedisUtil {
    * @param key 键
    * @return value 值
    */
-  public static synchronized Long incr(String key) {
+  public static Long incr(String key) {
     Jedis jedis = getJedis();
     if (null == jedis) {
       return null;
@@ -227,7 +227,7 @@ public class RedisUtil {
    * @param key 键
    * @return value 值
    */
-  public static synchronized Long decr(String key) {
+  public static Long decr(String key) {
     Jedis jedis = getJedis();
     if (null == jedis) {
       return null;

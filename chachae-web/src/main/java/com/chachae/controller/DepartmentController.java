@@ -2,11 +2,13 @@ package com.chachae.controller;
 
 import com.chachae.common.core.bean.Result;
 import com.chachae.common.core.entity.bo.Department;
+import com.chachae.common.core.utils.JwtUtil;
 import com.chachae.service.DepartmentService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -39,7 +41,9 @@ public class DepartmentController {
 
   @PostMapping("/add")
   @RequiresPermissions("department:add")
-  public Result add(Department department) {
+  public Result add(Department department, HttpServletRequest request) {
+    String username = JwtUtil.getAttribute(request, "username");
+    department.setOperatorUsername(username);
     this.departmentService.add(department);
     return Result.ok();
   }
@@ -53,7 +57,9 @@ public class DepartmentController {
 
   @PutMapping("/update")
   @RequiresPermissions("department:update")
-  public Result update(Department department) {
+  public Result update(Department department, HttpServletRequest request) {
+    String username = JwtUtil.getAttribute(request, "username");
+    department.setOperatorUsername(username);
     this.departmentService.update(department);
     return Result.ok();
   }

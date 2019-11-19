@@ -28,7 +28,9 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public List<User> queryAll() {
-    return this.userDao.selectAll();
+    List<User> list = this.userDao.selectAll();
+    list.forEach(user -> user.setPassword(null));
+    return list;
   }
 
   @Override
@@ -63,7 +65,9 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User queryByPrimaryKey(String uuid) {
-    return this.userDao.selectByPrimaryKey(uuid);
+    User user = this.userDao.selectByPrimaryKey(uuid);
+    user.setPassword(null);
+    return user;
   }
 
   /**

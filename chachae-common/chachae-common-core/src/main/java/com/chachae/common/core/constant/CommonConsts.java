@@ -5,6 +5,8 @@ import com.google.common.collect.Lists;
 import java.util.List;
 
 /**
+ * 通用常量池
+ *
  * @author chachae
  * @date 2019/11/14 21:01
  */
@@ -22,8 +24,8 @@ public class CommonConsts {
   /** 本地IP */
   public static final String LOCAL_HOST_IP = "127.0.0.1";
 
-  /** JWT过期时间一周 */
-  public static final long JWT_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 7;
+  /** JWT过期时间1天 */
+  public static final long JWT_EXPIRE_TIME = 1000 * 3600 * 24;
 
   /** 默认加密盐 */
   public static final String DEFAULT_SALT = "chachae";
@@ -33,4 +35,6 @@ public class CommonConsts {
 
   /** 默认管理员权限 */
   public static final String DEFAULT_ADMIN_PERMISSION = "*:*:*";
+
+  public static final String TOKEN_HEADER = "Authorization";
 }

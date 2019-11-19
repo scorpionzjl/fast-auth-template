@@ -37,3 +37,7 @@ server:
   servlet:
     context-path: '/api'
   port: 8099
+
+logging:
+  level:
+    com: debug

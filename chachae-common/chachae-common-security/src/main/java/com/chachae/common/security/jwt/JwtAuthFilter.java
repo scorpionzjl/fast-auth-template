@@ -2,9 +2,10 @@ package com.chachae.common.security.jwt;
 
 import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.StrUtil;
+import com.chachae.common.core.constant.CommonConsts;
 import com.chachae.common.core.enums.REnum;
 import com.chachae.common.core.exception.ApiException;
-import com.chachae.common.core.utils.JsonUtil;
+import com.chachae.common.redis.utils.JsonUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.subject.Subject;
@@ -68,7 +69,7 @@ public class JwtAuthFilter extends BasicHttpAuthenticationFilter {
   /** 获取token */
   private String getAuthorization(ServletRequest request) {
     HttpServletRequest req = (HttpServletRequest) request;
-    return req.getHeader("Authorization");
+    return req.getHeader(CommonConsts.TOKEN_HEADER);
   }
 
   /**

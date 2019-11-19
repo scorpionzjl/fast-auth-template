@@ -33,8 +33,8 @@ public class Department extends BaseEntity {
 
   private String remark;
 
-  @Column(name = "operator_uuid")
-  private String operatorUuid;
+  @Column(name = "operator_username")
+  private String operatorUsername;
 
   @Column(name = "operate_time")
   private Date operateTime;

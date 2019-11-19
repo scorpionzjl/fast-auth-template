@@ -63,8 +63,6 @@ public class DepartmentServiceImpl implements DepartmentService {
   @Override
   public void deleteByPrimaryKey(Integer id) {
     if (isExist(id)) {
-      // TODO seq向前移动......
-
       this.departmentDao.deleteByPrimaryKey(id);
     }
   }
@@ -77,8 +75,6 @@ public class DepartmentServiceImpl implements DepartmentService {
       // 设置操作信息
       department.setOperateIp(NetUtil.getLocalhostStr());
       department.setOperateTime(DateUtil.nowDateTime());
-      // todo 获取登陆人的uuid
-      department.setOperatorUuid("cyx-update");
       this.departmentDao.updateByPrimaryKeySelective(department);
     }
   }
@@ -94,8 +90,6 @@ public class DepartmentServiceImpl implements DepartmentService {
       // 设置操作信息
       department.setOperateIp(NetUtil.getLocalhostStr());
       department.setOperateTime(DateUtil.nowDateTime());
-      // todo 获取登陆人的uuid
-      department.setOperatorUuid("1");
       this.departmentDao.insertSelective(department);
     }
   }

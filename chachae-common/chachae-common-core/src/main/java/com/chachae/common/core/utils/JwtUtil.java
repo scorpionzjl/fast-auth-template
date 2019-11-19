@@ -7,6 +7,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 import com.chachae.common.core.constant.CommonConsts;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 /**
@@ -67,5 +68,16 @@ public class JwtUtil {
     } catch (JWTDecodeException e) {
       return null;
     }
+  }
+
+  /**
+   * 获取账号
+   *
+   * @param request HttpServletRequest对象
+   * @return uuid
+   */
+  public static String getAttribute(HttpServletRequest request, String attribute) {
+    String token = request.getHeader(CommonConsts.TOKEN_HEADER);
+    return JwtUtil.getAttribute(token, attribute);
   }
 }

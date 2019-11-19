@@ -42,8 +42,6 @@ public class UserController {
   @GetMapping("/query/{uuid}")
   public Result getByUuid(@PathVariable String uuid) {
     User user = this.userService.queryByPrimaryKey(uuid);
-    // 去除密码等敏感信息
-    user.setPassword(null);
     return Result.ok(user);
   }
 
@@ -51,7 +49,7 @@ public class UserController {
    * 删除用户登录信息
    *
    * @param uuid uuid
-   * @return 删除情况 todo 权限校验
+   * @return 删除情况
    */
   @DeleteMapping("/delete/{uuid}")
   @RequiresPermissions("user:delete")
@@ -64,7 +62,7 @@ public class UserController {
    * 更新用户登录信息
    *
    * @param user 用户信息
-   * @return 更新情况 todo 1. 权限校验 2. 密码加密
+   * @return 更新情况
    */
   @PutMapping("/update")
   @RequiresPermissions("user:update")
@@ -77,7 +75,7 @@ public class UserController {
    * 增加用户登录信息
    *
    * @param user 用户登陆信息
-   * @return 增加情况 todo 1. 权限校验 2. 密码校验
+   * @return 增加情况
    */
   @PostMapping("/add")
   @RequiresPermissions("user:add")

@@ -1,7 +1,9 @@
 package com.chachae.common.security.service;
 
 import com.chachae.common.core.entity.bo.User;
+import com.chachae.common.core.entity.dto.UserDTO;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -13,10 +15,10 @@ public interface AuthService {
   /**
    * 登录
    *
-   * @param user 登录信息
+   * @param dto 登录信息
    * @return token
    */
-  String login(User user);
+  Map<String, Object> login(UserDTO dto);
 
   /**
    * 根据帐号获取登录信息

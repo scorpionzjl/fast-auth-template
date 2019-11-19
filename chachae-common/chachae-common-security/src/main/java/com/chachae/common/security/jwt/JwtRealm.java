@@ -45,9 +45,9 @@ public class JwtRealm extends AuthorizingRealm {
    */
   @Override
   protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-    log.info("shiro 鉴权");
     JwtToken jwtToken = (JwtToken) principalCollection.getPrimaryPrincipal();
     SimpleAuthorizationInfo az = new SimpleAuthorizationInfo();
+    log.info("用户：{} 进行鉴权,", jwtToken.getUsername());
     // 设置角色和权限
     az.addRole(authService.queryRoleByUuid(jwtToken.getUuid()).toString());
     az.setStringPermissions(authService.queryPermissionsByUuid(jwtToken.getUuid()));
@@ -72,7 +72,7 @@ public class JwtRealm extends AuthorizingRealm {
             : JwtUtil.getAttribute(jwtToken.getToken(), "username");
     User user = authService.queryUserUsername(username);
     if (ObjectUtil.isEmpty(user)) {
-      throw new DisabledAccountException(REnum.NOT_EXIST.desc);
+      throw new DisabledAccountException(REnum.NOT_SING_IN.desc);
     } else {
       jwtToken.setUuid(user.getUuid());
       if (StrUtil.isBlank(jwtToken.getUsername())) {

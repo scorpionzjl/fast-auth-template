@@ -1,15 +1,17 @@
 package com.chachae.service.impl;
 
+import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.chachae.common.core.entity.bo.Permission;
 import com.chachae.common.core.entity.bo.User;
+import com.chachae.common.core.entity.dto.UserDTO;
 import com.chachae.common.core.exception.ApiException;
-import com.chachae.common.redis.utils.RedisUtil;
-import com.chachae.dao.AuthDao;
-import com.chachae.dao.PermissionDao;
+import com.chachae.common.redis.service.CacheService;
 import com.chachae.common.security.jwt.JwtToken;
 import com.chachae.common.security.service.AuthService;
+import com.chachae.dao.AuthDao;
+import com.chachae.dao.PermissionDao;
 import com.google.common.collect.Sets;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -17,7 +19,9 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -31,19 +35,21 @@ public class AuthServiceImpl implements AuthService {
 
   @Resource private AuthDao authDao;
   @Resource private PermissionDao permissionDao;
+  @Resource private CacheService cacheService;
 
   @Override
-  public String login(User user) {
+  public Map<String, Object> login(UserDTO dto) {
     Subject subject = SecurityUtils.getSubject();
     JwtToken token = new JwtToken();
-    token.setUsername(user.getUsername());
-    token.setPassword(user.getPassword());
+    token.setUsername(dto.getUsername());
+    token.setPassword(dto.getPassword());
     try {
       subject.login(token);
     } catch (Exception e) {
       throw ApiException.argError(e.getMessage());
     }
-    return ((JwtToken) SecurityUtils.getSubject().getPrincipal()).getToken();
+    String value = ((JwtToken) SecurityUtils.getSubject().getPrincipal()).getToken();
+    return Dict.create().set("token", value);
   }
 
   @Override
@@ -73,25 +79,30 @@ public class AuthServiceImpl implements AuthService {
     Example example = new Example(User.class);
     Example.Criteria criteria = example.createCriteria();
     criteria.andEqualTo("uuid", uuid);
-    User user = this.authDao.selectByExample(example).get(0);
-    return user.getRole();
+    return this.authDao.selectByExample(example).get(0).getRole();
   }
 
   @Override
   public Set<String> queryPermissionsByUuid(String uuid) {
-    List<Permission> list = this.permissionDao.queryByUuid(uuid);
-    Set<String> set = Sets.newHashSet();
-    list.forEach(pms -> set.add(pms.getPermission()));
-    return set;
+    // 尝试从redis 中获取权限
+    Set<String> sets = this.cacheService.getPermission(uuid);
+    if (ObjectUtil.isNotEmpty(sets)) {
+      return sets;
+    } else {
+      List<Permission> list = this.permissionDao.queryByUuid(uuid);
+      Set<String> set = Sets.newHashSet();
+      list.forEach(pms -> set.add(pms.getPermission()));
+      this.cacheService.setPermission(uuid, set);
+      return set;
+    }
   }
-
   /**
    * 邮箱地址的正则表达式验证
    *
    * @param username 用户名
    * @return true / false
    */
-  private boolean isEmail(String username) {
+  private boolean isEmail(@Valid String username) {
     String email = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
     return username.matches(email);
   }

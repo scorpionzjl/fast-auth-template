@@ -1,7 +1,7 @@
 package com.chachae.controller;
 
 import com.chachae.common.core.bean.Result;
-import com.chachae.common.core.entity.bo.User;
+import com.chachae.common.core.entity.dto.UserDTO;
 import com.chachae.common.security.service.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.Map;
 
 /**
  * @author chachae
@@ -22,8 +24,8 @@ public class AuthController {
   @Resource private AuthService authService;
 
   @PostMapping("/login")
-  public Result auth(User user) {
-    String token = authService.login(user);
-    return Result.ok(token);
+  public Result auth(@Valid UserDTO dto) {
+    Map<String, Object> result = authService.login(dto);
+    return Result.ok(result);
   }
 }
