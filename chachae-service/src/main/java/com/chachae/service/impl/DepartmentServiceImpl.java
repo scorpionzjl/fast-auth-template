@@ -3,12 +3,15 @@ package com.chachae.service.impl;
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.chachae.common.core.bean.PageResult;
 import com.chachae.common.core.entity.bo.Department;
 import com.chachae.common.core.exception.ApiException;
 import com.chachae.common.core.utils.DateUtil;
 import com.chachae.common.core.utils.LevelCalculateUtil;
 import com.chachae.dao.DepartmentDao;
 import com.chachae.service.DepartmentService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -28,25 +31,37 @@ public class DepartmentServiceImpl implements DepartmentService {
   @Resource private DepartmentDao departmentDao;
 
   @Override
-  public List<Department> queryAll() {
-    return this.departmentDao.selectAll();
+  public PageResult<Department> queryAll(Integer page, Integer rows) {
+    // 添加分页
+    PageHelper.startPage(page, rows);
+    List<Department> list = this.departmentDao.selectAll();
+    // 包装分页结果
+    PageInfo<Department> pageInfo = new PageInfo<>(list);
+    return new PageResult<>(pageInfo.getPages(), pageInfo.getTotal(), pageInfo.getList());
   }
 
   @Override
-  public List<Department> queryTree(Integer parentId) {
+  public PageResult<Department> queryTree(Integer parentId, Integer page, Integer rows) {
     // 计算部门等级
     String level = LevelCalculateUtil.calculateLevel(parentId);
     Example example = new Example(Department.class);
     Example.Criteria criteria = example.createCriteria();
+    // 添加分页
+    PageHelper.startPage(page, rows);
     if (LevelCalculateUtil.ROOT.equals(level)) {
       criteria.andEqualTo("parentId", LevelCalculateUtil.ROOT);
-      return this.departmentDao.selectByExample(example);
+      List<Department> list = this.departmentDao.selectByExample(example);
+      // 包装分页结果
+      PageInfo<Department> pageInfo = new PageInfo<>(list);
+      return new PageResult<>(pageInfo.getPages(), pageInfo.getTotal(), pageInfo.getList());
     }
     criteria.andEqualTo("level", level);
     List<Department> list = this.departmentDao.selectByExample(example);
     // 通过seq 从小到大排序
     list.sort(Comparator.comparingInt(Department::getSeq));
-    return list;
+    // 包装分页结果
+    PageInfo<Department> pageInfo = new PageInfo<>(list);
+    return new PageResult<>(pageInfo.getPages(), pageInfo.getTotal(), pageInfo.getList());
   }
 
   @Override
@@ -95,7 +110,7 @@ public class DepartmentServiceImpl implements DepartmentService {
   }
 
   private Integer calculateSeq(Integer parentId) {
-    List<Department> list = queryTree(parentId);
+    List<Department> list = queryTree(parentId, 1, 5).getItems();
     // parentId = 0 或者list 为空则父部门下无分支部门，直接返回1
     if (parentId == 0 || ObjectUtil.isEmpty(list)) {
       return 1;
@@ -123,7 +138,7 @@ public class DepartmentServiceImpl implements DepartmentService {
       throw ApiException.argError("不存在该部门");
     }
     Integer parentId = dept.getParentId();
-    List<Department> list = queryTree(id);
+    List<Department> list = queryTree(id, 1, 5).getItems();
     // 非顶级部门或者顶级部门下不存在分支部门
     if (parentId != 0 || ObjectUtil.isEmpty(list)) {
       return true;

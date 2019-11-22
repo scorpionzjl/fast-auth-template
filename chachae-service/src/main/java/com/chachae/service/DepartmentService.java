@@ -1,5 +1,6 @@
 package com.chachae.service;
 
+import com.chachae.common.core.bean.PageResult;
 import com.chachae.common.core.entity.bo.Department;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +17,7 @@ public interface DepartmentService {
    *
    * @return 所有部门的信息
    */
-  List<Department> queryAll();
+  PageResult<Department> queryAll(Integer page, Integer rows);
 
   /**
    * 查询所有父部门信息
@@ -24,7 +25,7 @@ public interface DepartmentService {
    * @param parentId 父部门id
    * @return 父部门信息
    */
-  List<Department> queryTree(Integer parentId);
+  PageResult<Department> queryTree(Integer parentId, Integer page, Integer rows);
 
   /**
    * 模糊搜索

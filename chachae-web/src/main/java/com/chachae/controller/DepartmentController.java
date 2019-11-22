@@ -1,5 +1,6 @@
 package com.chachae.controller;
 
+import com.chachae.common.core.bean.PageResult;
 import com.chachae.common.core.bean.Result;
 import com.chachae.common.core.entity.bo.Department;
 import com.chachae.common.core.utils.JwtUtil;
@@ -22,15 +23,20 @@ public class DepartmentController {
   @Resource private DepartmentService departmentService;
 
   @GetMapping("/list")
-  public Result list() {
-    List<Department> list = this.departmentService.queryAll();
-    return Result.ok(list);
+  public Result list(
+      @RequestParam(value = "page", defaultValue = "1") Integer page,
+      @RequestParam(value = "rows", defaultValue = "5") Integer rows) {
+    PageResult<Department> result = this.departmentService.queryAll(page, rows);
+    return Result.ok(result);
   }
 
   @GetMapping("/query/{parentId}")
-  public Result treeList(@PathVariable Integer parentId) {
-    List<Department> list = this.departmentService.queryTree(parentId);
-    return Result.ok(list);
+  public Result treeList(
+      @PathVariable Integer parentId,
+      @RequestParam(value = "page", defaultValue = "1") Integer page,
+      @RequestParam(value = "rows", defaultValue = "5") Integer rows) {
+    PageResult<Department> result = this.departmentService.queryTree(parentId, page, rows);
+    return Result.ok(result);
   }
 
   @GetMapping("/query")
