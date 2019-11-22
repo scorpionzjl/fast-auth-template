@@ -1,4 +1,4 @@
-package com.chachae.common.redis.utils;
+package com.chachae.common.core.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;

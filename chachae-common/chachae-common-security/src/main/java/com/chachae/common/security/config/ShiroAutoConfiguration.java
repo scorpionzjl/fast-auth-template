@@ -30,7 +30,7 @@ public class ShiroAutoConfiguration {
 
     // 自定义过滤器
     Map<String, Filter> filterMap = factoryBean.getFilters();
-    filterMap.put("authcToken", new JwtAuthFilter());
+    filterMap.put("authToken", new JwtAuthFilter());
     factoryBean.setFilters(filterMap);
 
     // 拦截配置
@@ -38,17 +38,17 @@ public class ShiroAutoConfiguration {
     // swagger的拦截
     filterChainDefinitions.put("/swagger-resources/**", "anon");
     filterChainDefinitions.put("/v2/api-docs", "anon");
+    filterChainDefinitions.put("/swagger-ui.html", "anon");
     filterChainDefinitions.put("/v2/api-docs-ext", "anon");
+    filterChainDefinitions.put("/druid/**", "anon");
     filterChainDefinitions.put("/doc.html", "anon");
     filterChainDefinitions.put("/webjars/**", "anon");
     // 不需要验证的api
     filterChainDefinitions.put("/auth/login", "anon");
-    // 测试
-    filterChainDefinitions.put("/test/**/**", "anon");
     // 上传
     filterChainDefinitions.put("/upload/**/**", "anon");
     // 其他全部需要鉴权
-    filterChainDefinitions.put("/**", "authcToken");
+    filterChainDefinitions.put("/**", "authToken");
     factoryBean.setFilterChainDefinitionMap(filterChainDefinitions);
     return factoryBean;
   }

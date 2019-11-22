@@ -1,24 +1,37 @@
 # 数据库配置
 spring:
   datasource:
+    # 如果存在多个数据源，监控的时候可以通过名字来区分开来
+    name: mysql
+    # 连接数据库的url
+    url: jdbc:mysql://localhost:3306/parentboot?characterEncoding=utf-8&useSSL=false
+    # 连接数据库的账号
     username: root
+    # 连接数据库的密码
     password: 123456
-    driver-class-name: com.mysql.jdbc.Driver
-    sql-script-encoding: utf-8
-    url: jdbc:mysql:///parentboot?useSSL=false
-    hikari:
-      # 最小空闲连接数量
-      minimum-idle: 5
-      # 连接池最大连接数，默认是10
-      maximum-pool-size: 15
-      # 此属性控制从池返回的连接的默认自动提交行为,默认值：true
-      auto-commit: true
-      # 一个连接idle状态的最大时长（毫秒），超时则被释放（retired），缺省:10分钟
-      idle-timeout: 600000
-      # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
-      max-lifetime: 1800000
-      # 数据库连接超时时间,默认30秒，即30000
-      connection-timeout: 60000
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 扩展插件
+    druid:
+      max-open-prepared-statements: -1
+      pool-prepared-statements: false
+      test-on-return: false
+      test-on-borrow: false
+      test-while-idle: true
+      validation-query: select count(1) from 'table'
+      min-evictable-idle-time-millis: 200000
+      time-between-eviction-runs-millis: 60000
+      min-idle: 1
+      max-wait: 60000
+      initial-size: 1
+      max-active: 20
+      filters: stat,wall,slf4j
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      stat-view-servlet:
+        login-username: chachae
+        login-password: chachae
+        enabled: true
+      use-global-data-source-stat: true
   # jackson 配置
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -37,7 +50,6 @@ server:
   servlet:
     context-path: '/api'
   port: 8099
-
 logging:
   level:
     com: debug

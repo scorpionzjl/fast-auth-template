@@ -1,9 +1,9 @@
 package com.chachae.common.redis.service.impl;
 
 import cn.hutool.core.util.StrUtil;
+import com.chachae.common.core.utils.JsonUtil;
 import com.chachae.common.redis.constant.RedisConsts;
 import com.chachae.common.redis.service.CacheService;
-import com.chachae.common.redis.utils.JsonUtil;
 import com.chachae.common.redis.utils.RedisUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.stereotype.Service;

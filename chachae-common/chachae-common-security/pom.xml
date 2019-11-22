@@ -16,10 +16,6 @@
     <dependencies>
         <dependency>
             <groupId>com.chachae</groupId>
-            <artifactId>chachae-common-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.chachae</groupId>
             <artifactId>chachae-common-redis</artifactId>
         </dependency>
         <!-- shiro -->

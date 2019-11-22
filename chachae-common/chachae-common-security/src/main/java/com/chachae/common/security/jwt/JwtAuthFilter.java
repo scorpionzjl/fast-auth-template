@@ -5,7 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import com.chachae.common.core.constant.CommonConsts;
 import com.chachae.common.core.enums.REnum;
 import com.chachae.common.core.exception.ApiException;
-import com.chachae.common.redis.utils.JsonUtil;
+import com.chachae.common.core.utils.JsonUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.subject.Subject;

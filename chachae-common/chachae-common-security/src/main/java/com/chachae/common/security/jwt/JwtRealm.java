@@ -47,7 +47,7 @@ public class JwtRealm extends AuthorizingRealm {
   protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
     JwtToken jwtToken = (JwtToken) principalCollection.getPrimaryPrincipal();
     SimpleAuthorizationInfo az = new SimpleAuthorizationInfo();
-    log.info("用户：{} 进行鉴权,", jwtToken.getUsername());
+    log.info("用户：{} 进行鉴权", jwtToken.getUsername());
     // 设置角色和权限
     az.addRole(authService.queryRoleByUuid(jwtToken.getUuid()).toString());
     az.setStringPermissions(authService.queryPermissionsByUuid(jwtToken.getUuid()));
